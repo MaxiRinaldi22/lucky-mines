@@ -12,6 +12,12 @@ function GameContainer() {
     Array(arrayResult.length).fill("#24263e")
   );
 
+  const [clickedCards, setClickedCards] = useState(
+    Array(arrayResult.length).fill(false)
+  );
+
+  const [cardIcons, setCardIcons] = useState(Array(arrayResult.length).fill(null));
+
   const array = useGame(selectedValue);
   useEffect(() => {
     setArratResult(array);
@@ -22,7 +28,10 @@ function GameContainer() {
   const handleRestart = () => {
     setArratResult(array);
     setCardColors(Array(arrayResult.length).fill("#24263e"));
+    setClickedCards(Array(arrayResult.length).fill(false));
+    setCardIcons(Array(arrayResult.length).fill(null));
     setIsPlaing(false);
+    setLose(false);
     setLose(false);
   };
 
@@ -33,7 +42,7 @@ function GameContainer() {
   return (
     <main className="container-main">
       <Menu
-      selectedValue={selectedValue}
+        selectedValue={selectedValue}
         setSelectedValue={setSelectedValue}
         handleRestart={handleRestart}
         handleStartClick={handleStartClick}
@@ -49,6 +58,10 @@ function GameContainer() {
           isPlaing,
           setLose,
           lose,
+          setClickedCards,
+          clickedCards,
+          setCardIcons,
+          cardIcons,
         }}
       />
     </main>

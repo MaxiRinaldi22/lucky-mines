@@ -1,12 +1,17 @@
-import { useState } from "react";
-// import { StarLose, StarWin } from "./Icons";
+import { Bomb, StarLose, StarWin } from "./Icons";
 
 export function Board({ arrayResult, config }) {
-  const { setCardColors, cardColors, isPlaing, setLose,  lose } = config;
-
-  const [clickedCards, setClickedCards] = useState(
-    Array(arrayResult.length).fill(false)
-  );
+  const {
+    setCardColors,
+    cardColors,
+    isPlaing,
+    setLose,
+    lose,
+    clickedCards,
+    setClickedCards,
+    setCardIcons,
+    cardIcons,
+  } = config;
 
   const handleClick = (index) => {
     // Color part
@@ -16,6 +21,10 @@ export function Board({ arrayResult, config }) {
           status ? (clickedCards[i] ? "#DDB345" : "#5F5239") : "red"
         )
       );
+
+      setCardIcons((prevIcons) =>
+        prevIcons.map((icon, i) => (index === i ? <Bomb /> : icon))
+      );
     } else {
       setCardColors((prevColors) =>
         prevColors.map((status, i) => (index === i ? "#DDB345" : status))
@@ -24,12 +33,31 @@ export function Board({ arrayResult, config }) {
       setClickedCards((prevClick) =>
         prevClick.map((clicked, i) => (i === index ? true : clicked))
       );
+
+      setCardIcons((prevIcons) =>
+        prevIcons.map((icon, i) => (index === i ? <StarWin /> : icon))
+      );
     }
 
     // Lose part
-    if (arrayResult[index] === false) {
+    if (!arrayResult[index]) {
       setLose(true);
+      showResult();
     }
+  };
+
+  const showResult = () => {
+    setCardIcons((prevIcons) =>
+      arrayResult.map((status, i) => {
+        if (!status) {
+          return <Bomb />;
+        } else if (status && !clickedCards[i]) {
+          return <StarLose />;
+        } else {
+          return prevIcons[i];
+        }
+      })
+    );
   };
 
   return (
@@ -47,17 +75,7 @@ export function Board({ arrayResult, config }) {
             cursor: !isPlaing || lose ? "not-allowed" : "pointer",
           }}
         >
-          {/* {clickedCards[i] &&
-            (status ? (
-              <StarWin />
-            ) : (
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <path
-                  d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"
-                  fill="#ffffff"
-                />
-              </svg>
-            ))} */}
+          {cardIcons[i]}
         </button>
       ))}
     </section>
