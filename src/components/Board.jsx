@@ -1,35 +1,16 @@
 import { Bomb, StarLose, StarWin } from "./Icons";
 
-export function Board({ arrayResult, config }) {
-  const {
-    setCardColors,
-    cardColors,
-    isPlaing,
-    setLose,
-    lose,
-    clickedCards,
-    setClickedCards,
-    setCardIcons,
-    cardIcons,
-  } = config;
+export function Board({ arrayResult, functions, card }) {
+  const { isPlaing, lose, setLose, clickedCards, setClickedCards } = functions;
+  const { cardIcons, setCardIcons } = card;
 
   const handleClick = (index) => {
     // Color part
     if (!arrayResult[index]) {
-      setCardColors(
-        arrayResult.map((status, i) =>
-          status ? (clickedCards[i] ? "#DDB345" : "#5F5239") : "red"
-        )
-      );
-
       setCardIcons((prevIcons) =>
         prevIcons.map((icon, i) => (index === i ? <Bomb /> : icon))
       );
     } else {
-      setCardColors((prevColors) =>
-        prevColors.map((status, i) => (index === i ? "#DDB345" : status))
-      );
-
       setClickedCards((prevClick) =>
         prevClick.map((clicked, i) => (i === index ? true : clicked))
       );
@@ -71,8 +52,17 @@ export function Board({ arrayResult, config }) {
           }}
           disabled={!isPlaing || lose}
           style={{
-            backgroundColor: cardColors[i],
-            cursor: !isPlaing || lose ? "not-allowed" : "pointer",
+            backgroundColor: !clickedCards[i]
+              ? lose
+                ? "#071823"
+                : "#2B404B"
+              : "#071823",
+
+            borderBottom: !clickedCards[i]
+              ? !lose
+                ? "4px solid #1E2E3A"
+                : "none"
+              : "none",
           }}
         >
           {cardIcons[i]}

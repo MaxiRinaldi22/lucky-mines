@@ -8,60 +8,63 @@ function GameContainer() {
   const [arrayResult, setArratResult] = useState(useGame(1));
   const [isPlaing, setIsPlaing] = useState(false);
   const [lose, setLose] = useState(false);
-  const [cardColors, setCardColors] = useState(
-    Array(arrayResult.length).fill("#24263e")
-  );
 
   const [clickedCards, setClickedCards] = useState(
     Array(arrayResult.length).fill(false)
   );
 
-  const [cardIcons, setCardIcons] = useState(Array(arrayResult.length).fill(null));
+  const [cardIcons, setCardIcons] = useState(
+    Array(arrayResult.length).fill(null)
+  );
 
   const array = useGame(selectedValue);
   useEffect(() => {
     setArratResult(array);
-    setCardColors(Array(arrayResult.length).fill("#24263e"));
+
     setIsPlaing(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedValue]);
 
   const handleRestart = () => {
     setArratResult(array);
-    setCardColors(Array(arrayResult.length).fill("#24263e"));
+
     setClickedCards(Array(arrayResult.length).fill(false));
     setCardIcons(Array(arrayResult.length).fill(null));
     setIsPlaing(false);
-    setLose(false);
     setLose(false);
   };
 
   const handleStartClick = () => {
     setIsPlaing(true);
   };
+  
   // ORDER PROPS
   return (
     <main className="container-main">
       <Menu
-        selectedValue={selectedValue}
-        setSelectedValue={setSelectedValue}
-        handleRestart={handleRestart}
-        handleStartClick={handleStartClick}
-        isPlaing={isPlaing}
-        lose={lose}
+        functions={{
+          handleRestart,
+          handleStartClick,
+        }}
+        states={{
+          selectedValue,
+          setSelectedValue,
+          isPlaing,
+          lose,
+        }}
       />
       <Board
         arrayResult={arrayResult}
-        config={{
-          cardColors,
-          setCardColors,
-          setIsPlaing,
+        functions={{
           isPlaing,
-          setLose,
           lose,
-          setClickedCards,
+          setLose,
           clickedCards,
-          setCardIcons,
+          setClickedCards,
+        }}
+        card={{
           cardIcons,
+          setCardIcons,
         }}
       />
     </main>

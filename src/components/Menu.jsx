@@ -1,73 +1,65 @@
 import { useState } from "react";
 
-export function Menu({
-  selectedValue,
-  setSelectedValue,
-  isPlaing,
-  handleRestart,
-  handleStartClick,
-  lose,
-}) {
-  const [inputValue, setInputValue] = useState(1);
-  const [selected, setSelected] = useState(1);
-  const arrayOptions = [1, 3, 5, 10, "Custom"];
+export function Menu({ functions, states }) {
+  const { handleRestart, handleStartClick } = functions;
+  const { selectedValue, setSelectedValue, isPlaing, lose } = states;
+  const options = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24,
+  ];
 
-  console.log("Valor " + selectedValue);
-  console.log("Label " + selected);
-  console.log("Input " + inputValue);
-
-  const handleSelect = (value) => {
-    setSelected(value);
-    value === "Custom" ? setSelectedValue(inputValue) : setSelectedValue(value);
-  };
-
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-    // setSelectedValue(e.target.value);
-  };
+  console.log(selectedValue);
 
   return (
     <section className="container-menu">
+      <section className="bet-amount-container">
+        <p>Amount</p>
+        <div className="input-container">
+          <input type="number" className="bet-input" />
+
+          <div className="action-buttons">
+            <button className="half-btn">½</button>
+
+            <button className="double-btn">2x</button>
+
+            <button className="max-btn">Max</button>
+          </div>
+        </div>
+      </section>
+
       <section className="containet-input">
-        <p>Number of Mines</p>
+        <p>Mines</p>
         <div className="container">
           <form
             className="selection-container"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="container-buttons">
-              {arrayOptions.map((option, i) => (
-                <button
-                  key={i}
-                  onClick={() => handleSelect(option)}
-                  className={selected === option ? "active" : ""}
-                  style={{ cursor: isPlaing ? "not-allowed" : "pointer" }}
-                  disabled={isPlaing}
-                >
+            <select
+              className="selection"
+              value={selectedValue}
+              onChange={(e) => setSelectedValue(e.target.value)}
+            >
+              {options.map((option) => (
+                <option key={option} value={option}>
                   {option}
-                </button>
+                </option>
               ))}
-            </div>
-            <div>
-              {selected === "Custom" && (
-                <input
-                  onChange={handleChange}
-                  value={inputValue}
-                  type="number"
-                  className="custom-input"
-                  min={1}
-                  max={25}
-                />
-              )}
-            </div>
+            </select>
           </form>
         </div>
       </section>
       <button
         className="start-btn"
         onClick={() => (isPlaing ? handleRestart() : handleStartClick())}
+        style={{
+          backgroundColor: isPlaing
+            ? lose
+              ? "#00E701"
+              : "#60AF60"
+            : "#00E701",
+        }}
       >
-        {isPlaing ? (lose ? "Play Again" : "Cash Out") : "Start Game"}
+        {isPlaing ? (lose ? "Play Again" : "Cash Out") : "Play"}
       </button>
     </section>
   );
