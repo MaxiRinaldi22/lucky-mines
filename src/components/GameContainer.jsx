@@ -8,11 +8,9 @@ function GameContainer() {
   const [arrayResult, setArratResult] = useState(useGame(1));
   const [isPlaing, setIsPlaing] = useState(false);
   const [lose, setLose] = useState(false);
-
   const [clickedCards, setClickedCards] = useState(
     Array(arrayResult.length).fill(false)
   );
-
   const [cardIcons, setCardIcons] = useState(
     Array(arrayResult.length).fill(null)
   );
@@ -27,7 +25,6 @@ function GameContainer() {
 
   const handleRestart = () => {
     setArratResult(array);
-
     setClickedCards(Array(arrayResult.length).fill(false));
     setCardIcons(Array(arrayResult.length).fill(null));
     setIsPlaing(false);
@@ -37,10 +34,9 @@ function GameContainer() {
   const handleStartClick = () => {
     setIsPlaing(true);
   };
-  
-  // ORDER PROPS
+
   return (
-    <main className="container-main">
+    <main className="container-game">
       <Menu
         functions={{
           handleRestart,

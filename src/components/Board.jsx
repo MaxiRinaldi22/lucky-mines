@@ -1,45 +1,65 @@
-import { Bomb, StarLose, StarWin } from "./Icons";
+import { Bomb, BombLose, StarLose, StarWin } from "./Icons";
+import diamondSound from "../assets/sound/diamond.wav";
+import bomb from "../assets/sound/bomb.wav";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export function Board({ arrayResult, functions, card }) {
   const { isPlaing, lose, setLose, clickedCards, setClickedCards } = functions;
   const { cardIcons, setCardIcons } = card;
-
+  const [localClicked, setLocalClicked] = useState(null);
   const handleClick = (index) => {
-    // Color part
     if (!arrayResult[index]) {
+      // If is a bomb
       setCardIcons((prevIcons) =>
-        prevIcons.map((icon, i) => (index === i ? <Bomb /> : icon))
+        prevIcons.map((icon, i) => (index === i ? <Bomb key={i}/> : icon))
       );
+
+      setLocalClicked(index);
+      setLose(true);
     } else {
+      // If is a diamond
       setClickedCards((prevClick) =>
         prevClick.map((clicked, i) => (i === index ? true : clicked))
       );
 
       setCardIcons((prevIcons) =>
-        prevIcons.map((icon, i) => (index === i ? <StarWin /> : icon))
+        prevIcons.map((icon, i) => (index === i ? <StarWin key={i}/> : icon))
       );
     }
 
-    // Lose part
-    if (!arrayResult[index]) {
-      setLose(true);
-      showResult();
+    // Sound
+    const diamndSound = new Audio(diamondSound);
+    const bombSound = new Audio(bomb);
+
+    if (arrayResult[index]) {
+      diamndSound.play();
+    } else {
+      bombSound.play();
     }
   };
 
   const showResult = () => {
     setCardIcons((prevIcons) =>
       arrayResult.map((status, i) => {
-        if (!status) {
-          return <Bomb />;
+        if (!status && i === localClicked) {
+          return <Bomb key={i} />;
+        } else if (!status && !clickedCards[i]) {
+          return <BombLose key={i} />;
         } else if (status && !clickedCards[i]) {
-          return <StarLose />;
+          return <StarLose key={i} />;
         } else {
           return prevIcons[i];
         }
       })
     );
   };
+
+  useEffect(() => {
+    if (lose) {
+      showResult();
+    }
+  }, [lose]);
 
   return (
     <section className="container-board">

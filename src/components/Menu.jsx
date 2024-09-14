@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export function Menu({ functions, states }) {
   const { handleRestart, handleStartClick } = functions;
   const { selectedValue, setSelectedValue, isPlaing, lose } = states;
@@ -7,8 +5,6 @@ export function Menu({ functions, states }) {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24,
   ];
-
-  console.log(selectedValue);
 
   return (
     <section className="container-menu">
@@ -19,9 +15,7 @@ export function Menu({ functions, states }) {
 
           <div className="action-buttons">
             <button className="half-btn">½</button>
-
             <button className="double-btn">2x</button>
-
             <button className="max-btn">Max</button>
           </div>
         </div>
@@ -35,6 +29,7 @@ export function Menu({ functions, states }) {
             onSubmit={(e) => e.preventDefault()}
           >
             <select
+              disabled={isPlaing}
               className="selection"
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
@@ -55,11 +50,11 @@ export function Menu({ functions, states }) {
           backgroundColor: isPlaing
             ? lose
               ? "#00E701"
-              : "#60AF60"
+              : "#009e00"
             : "#00E701",
         }}
       >
-        {isPlaing ? (lose ? "Play Again" : "Cash Out") : "Play"}
+        {isPlaing ? (lose ? "Play Again" : "Cashout") : "Play "}
       </button>
     </section>
   );

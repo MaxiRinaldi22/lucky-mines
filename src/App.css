@@ -1,5 +1,4 @@
-.container-main {
-  width: 100%;
+.container-game {
   height: 100vh;
 
   display: flex;
@@ -57,7 +56,7 @@
 
 p {
   margin-bottom: 5px;
-  color: #9192a0;
+  color: #b1bad3;
 
   font-weight: 500;
   font-size: 0.8rem;
