@@ -1,14 +1,14 @@
-import { BalanceProvider } from "./context/BalanceContext";
+import { GameStateProvider } from "./context/GameContext";
 import GameContainer from "./components/GameContainer";
 import Header from "./components/Header";
 import "./App.css";
 
 function App() {
   return (
-    <BalanceProvider>
+    <GameStateProvider>
       <Header />
       <GameContainer />
-    </BalanceProvider>
+    </GameStateProvider>
   );
 }
 

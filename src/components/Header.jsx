@@ -1,4 +1,4 @@
-import { BalanceContext } from "../context/BalanceContext";
+import { GameContext } from "../context/GameContext";
 import {  useContext, useState } from "react";
 import logo from "../assets/images/logo.png"
 import "./Header.css";
@@ -6,7 +6,7 @@ import { Info } from "./Icons";
 
 function Header() {
   const [showInfo, setShowInfo] = useState(false);
-  const { balance, setBalance } = useContext(BalanceContext);
+  const { balance, setBalance } = useContext(GameContext);
 
   return (
     <header>
