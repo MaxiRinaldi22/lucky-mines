@@ -3,7 +3,7 @@ import { BalanceContext } from "../context/BalanceContext";
 
 export function Menu({ functions, states }) {
   const { handleRestart, handleStartClick } = functions;
-  const { selectedValue, setSelectedValue, isPlaing, lose,  btnText,} = states;
+  const { selectedValue, setSelectedValue, isPlaing, lose,  btnText, win} = states;
   const { balance } = useContext(BalanceContext);
 
   const options = [
@@ -34,7 +34,7 @@ export function Menu({ functions, states }) {
             onSubmit={(e) => e.preventDefault()}
           >
             <select
-              disabled={isPlaing}
+              disabled={isPlaing || win || lose}
               className="selection"
               value={selectedValue}
               onChange={(e) => setSelectedValue(e.target.value)}
@@ -50,7 +50,7 @@ export function Menu({ functions, states }) {
       </section>
       <button
         className="start-btn"
-        onClick={() => (isPlaing ? handleRestart() : handleStartClick())}
+        onClick={() => win ? handleRestart() : (isPlaing ? handleRestart() : handleStartClick())}
         style={{
           backgroundColor: isPlaing
             ? lose

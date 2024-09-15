@@ -10,6 +10,7 @@ header {
 
 .container-header {
   width: 50%;
+  padding: 0 1rem;
 
   display: flex;
   justify-content: space-between;
@@ -17,7 +18,10 @@ header {
 }
 
 .wallet-container {
+  width: 200px;
   display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .wallet {
@@ -54,4 +58,14 @@ header {
   font-weight: bold;
   border: none;
   cursor: pointer;
+}
+
+.wallet-ifo {
+  display: flex;
+  align-items: center;
+}
+
+.info {
+  width: 100%;
+  height: 30px;
 }

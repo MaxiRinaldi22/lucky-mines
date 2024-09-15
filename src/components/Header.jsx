@@ -1,9 +1,11 @@
 import { BalanceContext } from "../context/BalanceContext";
-import {  useContext } from "react";
+import {  useContext, useState } from "react";
 import logo from "../assets/images/logo.png"
 import "./Header.css";
+import { Info } from "./Icons";
 
 function Header() {
+  const [showInfo, setShowInfo] = useState(false);
   const { balance, setBalance } = useContext(BalanceContext);
 
   return (
@@ -13,7 +15,14 @@ function Header() {
         <div className="wallet-container">
           <div className="wallet"> <p> ${balance}</p> <img src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png" alt="Bitcon" /></div>
           <button className="wallet-btn" onClick={() => setBalance((prevBalance) => prevBalance + 100)}>Wallet</button>
+          <div className="wallet-ifo" onMouseLeave={() => setShowInfo(false)} onMouseEnter={() => setShowInfo(true)}>
+            <Info />
+          </div>
+          <div className="info">
+            {showInfo && <p>+100</p>}
+          </div>
         </div>
+          
         
       </section>
     </header>

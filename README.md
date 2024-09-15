@@ -1,5 +1,5 @@
 # TODO
-- [ ] Tiempo de espera para compezar el juego
+
 - [ ] Cuando se da cashout mostrar todas las cards que no fueron clickeadas
 - [ ] Se tiene que manejar cuando el jugador gana, al ganar el jugador se le tiene que mostrar el x que gana y el dinero que gana
 - [ ] Hover de las cards
@@ -11,3 +11,9 @@
 - [ ] Al dat click en cashout debe se debe agregar la cantidad ganada al balande
 - [ ] Agrenar una i a la derecha del boton wallet para expicar que el boton agrega 100 de balance
 - [ ] Apuesta minima de $1
+
+
+## 15/9
+
+- Estado para manejar los bordes
+- AREGLAR LAS PROPS DEL BOARD

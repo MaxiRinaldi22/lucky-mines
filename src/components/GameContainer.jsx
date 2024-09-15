@@ -9,6 +9,9 @@ function GameContainer() {
   const [btnText, setBtnText] = useState("Play");
   const [isPlaing, setIsPlaing] = useState(false);
   const [lose, setLose] = useState(false);
+  const [win, setWin] = useState(false);
+  const [winArray, setWinArray] = useState(arrayResult.map((item) => !item));
+
   const [clickedCards, setClickedCards] = useState(
     Array(arrayResult.length).fill(false)
   );
@@ -20,6 +23,7 @@ function GameContainer() {
   useEffect(() => {
     setArratResult(array);
     setIsPlaing(false);
+    setWinArray(array.map((item) => !item));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedValue]);
 
@@ -29,12 +33,11 @@ function GameContainer() {
     setCardIcons(Array(arrayResult.length).fill(null));
     setIsPlaing(false);
     setLose(false);
-
+    setWin(false);
     setBtnText("Calculating balance...");
     setTimeout(() => {
       setBtnText("Play");
-    }, 300)
-    
+    }, 300);
   };
 
   const handleStartClick = () => {
@@ -58,6 +61,7 @@ function GameContainer() {
           isPlaing,
           lose,
           btnText,
+          win,
         }}
       />
       <Board
@@ -69,6 +73,10 @@ function GameContainer() {
           clickedCards,
           setClickedCards,
           setBtnText,
+          winArray,
+          setWinArray,
+          setWin,
+          win,
         }}
         card={{
           cardIcons,
