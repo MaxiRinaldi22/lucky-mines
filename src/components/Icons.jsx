@@ -1,7 +1,7 @@
-import diamond from "../assets/img/diamond.png";
-import diamondLose from "../assets/img/diamond-lose.png";
-import bomb from "../assets/img/jewel.png";
-import bombLose from "../assets/img/jewel-lose.png";
+import diamond from "../assets/images/diamond.png";
+import diamondLose from "../assets/images/diamond-lose.png";
+import bomb from "../assets/images/jewel.png";
+import bombLose from "../assets/images/jewel-lose.png";
 
 export function StarWin() {
   return <img width={64} height={64} src={diamond} alt="" />;

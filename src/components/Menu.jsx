@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { BalanceContext } from "../context/BalanceContext";
+
 export function Menu({ functions, states }) {
   const { handleRestart, handleStartClick } = functions;
-  const { selectedValue, setSelectedValue, isPlaing, lose } = states;
+  const { selectedValue, setSelectedValue, isPlaing, lose,  btnText,} = states;
+  const { balance } = useContext(BalanceContext);
+
   const options = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24,
@@ -54,7 +59,7 @@ export function Menu({ functions, states }) {
             : "#00E701",
         }}
       >
-        {isPlaing ? (lose ? "Play Again" : "Cashout") : "Play "}
+        {btnText}
       </button>
     </section>
   );

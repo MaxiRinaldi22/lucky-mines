@@ -1,22 +1,22 @@
+import { useEffect, useState } from "react";
 import { Bomb, BombLose, StarLose, StarWin } from "./Icons";
 import diamondSound from "../assets/sound/diamond.wav";
 import bomb from "../assets/sound/bomb.wav";
-import { useEffect } from "react";
-import { useState } from "react";
 
 export function Board({ arrayResult, functions, card }) {
-  const { isPlaing, lose, setLose, clickedCards, setClickedCards } = functions;
+  const { isPlaing, lose, setLose, clickedCards, setClickedCards, setBtnText } = functions;
   const { cardIcons, setCardIcons } = card;
   const [localClicked, setLocalClicked] = useState(null);
   const handleClick = (index) => {
     if (!arrayResult[index]) {
       // If is a bomb
       setCardIcons((prevIcons) =>
-        prevIcons.map((icon, i) => (index === i ? <Bomb key={i}/> : icon))
+        prevIcons.map((icon, i) => (index === i ? <Bomb key={i} /> : icon))
       );
 
       setLocalClicked(index);
       setLose(true);
+      setBtnText("Play Again"); 
     } else {
       // If is a diamond
       setClickedCards((prevClick) =>
@@ -24,7 +24,7 @@ export function Board({ arrayResult, functions, card }) {
       );
 
       setCardIcons((prevIcons) =>
-        prevIcons.map((icon, i) => (index === i ? <StarWin key={i}/> : icon))
+        prevIcons.map((icon, i) => (index === i ? <StarWin key={i} /> : icon))
       );
     }
 
@@ -63,7 +63,7 @@ export function Board({ arrayResult, functions, card }) {
 
   return (
     <section className="container-board">
-      {arrayResult.map((status, i) => (
+      {arrayResult.map((_, i) => (
         <button
           key={i}
           className="card"
