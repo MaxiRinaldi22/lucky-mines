@@ -31,6 +31,7 @@
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
+  color: black;
 }
 
 /* Input */
@@ -274,6 +275,14 @@ p {
     border-radius: 0 0 8px 8px;
   } 
 
+  p {
+    font-size: 1rem;
+  }
+
+  .bet-input {
+    font-size: 1rem;
+  }
+ 
   .container-menu {
     width: 380px;
     height: 280px;
