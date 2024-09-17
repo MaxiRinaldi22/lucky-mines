@@ -45,7 +45,9 @@ export function Board({ gameState, gameActions, styleActions, card }) {
 
     // Sound
     const diamndSound = new Audio(diamondSound);
+    diamndSound.preload = "auto";
     const bombSound = new Audio(bomb);
+    bombSound.preload = "auto";
 
     if (gameState[index] && !clickedCards[index]) {
       diamndSound.play();
