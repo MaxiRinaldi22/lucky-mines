@@ -100,7 +100,7 @@ export function Menu({ functions, gameActions, styleActions }) {
         <section className="info-rewards">
           <div className="info-rewards-text">
             <p>Total multi ({comulativeMulti.toFixed(2)}x)</p>
-            <p>{totalBet - inputBet} BTC</p>
+            <p>{(totalBet - inputBet).toFixed(10)} BTC</p>
           </div>
           <div className="info-rewards-totalBet">
             <p>{(totalBet - inputBet).toFixed(2)}</p>
