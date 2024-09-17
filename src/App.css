@@ -250,4 +250,17 @@ p {
   .container-game {
     flex-direction: column;
   }
+
+  .container-main-board {
+    width: 400px;
+    height: 400px;
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+  } 
+
+  .container-menu {
+    width: 400px;
+    height: 300px;
+    border-radius: 8px 8px 0 0;
+  }
  }  
