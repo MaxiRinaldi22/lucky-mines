@@ -7,10 +7,17 @@ import bomb from "../assets/sound/bomb.wav";
 export function Board({ gameState, gameActions, styleActions, card }) {
   const { isPlaing, comulativeMulti, totalBet } = gameActions;
   const { lose, setLose, win, setWin, winArray, setWinArray } = gameActions;
-  const { clickedCards, setClickedCards, setBtnText, setBorder, border } = styleActions;
+  const { clickedCards, setClickedCards, setBtnText, setBorder, border } =
+    styleActions;
   const { cardIcons, setCardIcons, setClickedCardsReward } = card;
   const { balance, setBalance } = useContext(GameContext);
   const [localClicked, setLocalClicked] = useState(null);
+
+  // Sound
+  const diamndSound = new Audio(diamondSound);
+  diamndSound.preload = "auto";
+  const bombSound = new Audio(bomb);
+  bombSound.preload = "auto";
 
   const handleClick = (index) => {
     if (!gameState[index]) {
@@ -42,12 +49,6 @@ export function Board({ gameState, gameActions, styleActions, card }) {
         ...winArray.slice(index + 1),
       ]);
     }
-
-    // Sound
-    const diamndSound = new Audio(diamondSound);
-    diamndSound.preload = "auto";
-    const bombSound = new Audio(bomb);
-    bombSound.preload = "auto";
 
     if (gameState[index] && !clickedCards[index]) {
       diamndSound.play();
