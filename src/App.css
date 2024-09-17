@@ -247,6 +247,11 @@ p {
   color: white;
 }
 
+.icon {
+  width: 64px;
+  height: 64px;
+}
+
 @media (max-width: 1024px) { 
   .container-game {
     flex-direction: column;
@@ -287,5 +292,10 @@ p {
     width: 380px;
     height: 280px;
     border-radius: 8px 8px 0 0;
+  }
+
+  .icon {
+    width: 34px;
+    height: 34px;
   }
  }
