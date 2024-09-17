@@ -264,3 +264,19 @@ p {
     border-radius: 8px 8px 0 0;
   }
  }  
+
+
+ @media (max-width: 768px) {
+  .container-main-board {
+    width: 380px;
+    height: 380px;
+    padding: 10px;
+    border-radius: 0 0 8px 8px;
+  } 
+
+  .container-menu {
+    width: 380px;
+    height: 280px;
+    border-radius: 8px 8px 0 0;
+  }
+ }
