@@ -1,20 +1,20 @@
 # 💣 Lucky Mines
 
-**Lucky Mines** es un juego inspirado en el popular juego de minas del casino Stake. En esta versión, los jugadores deben descubrir las casillas sin toparse con una mina para ganar. A medida que avanzan, pueden elegir continuar para aumentar sus ganancias o retirarse con el premio acumulado. ¡Pon a prueba tu suerte y estrategia en este emocionante desafío! 🎰
+**Lucky Mines** is a game inspired by the popular mines game from the Stake casino. In this version, players must uncover tiles without hitting a mine to win. As they progress, they can choose to continue to increase their winnings or cash out with the accumulated prize. Test your luck and strategy in this exciting challenge! 🎰
 
-## 🎮 Características
+## 🎮 Features
 
-- 🖱️ Interfaz de usuario intuitiva y atractiva.
-- 💡 Mecánica de juego simple e inspirada en los juegos de minas de casino.
-- ⚙️ Opciones para personalizar la dificultad y el número de minas.
+- 🖱️ Intuitive and attractive user interface.
+- 💡 Simple game mechanics inspired by casino mine games.
+- ⚙️ Options to customize difficulty and the number of mines.
 
-## 🛠️ Tecnologías utilizadas
+## 🛠️ Technologies Used
 
 - **Frontend:** React, HTML, CSS, JavaScript
 - **React Hooks:** useState, useContext, useEffect
-- **Custom Hooks:** Se utilizan hooks personalizados para gestionar la lógica del juego y el estado de la aplicación.
-- **Estilos:** Styled Components / CSS Modules
+- **Custom Hooks:** Custom hooks are used to manage the game logic and application state.
+- **Styling:** Styled Components / CSS Modules
 
 ---
 
-¡Esperamos que disfrutes jugando a Lucky Mines! 🎉
+We hope you enjoy playing Lucky Mines! 🎉
