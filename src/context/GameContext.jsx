@@ -16,7 +16,14 @@ const GameStateProvider = ({ children }) => {
 
   return (
     <GameContext.Provider
-      value={{ balance, setBalance, inputBet, setInputBet, numberOfMines, setNumberOfMines }}
+      value={{
+        balance,
+        setBalance,
+        inputBet,
+        setInputBet,
+        numberOfMines,
+        setNumberOfMines,
+      }}
     >
       {children}
     </GameContext.Provider>

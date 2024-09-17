@@ -3,7 +3,8 @@ import { GameContext } from "../context/GameContext";
 
 export function Menu({ functions, gameActions, styleActions }) {
   const { handleRestart, handleStartClick, handleCashout } = functions;
-  const { isPlaing, lose, win } = gameActions;
+  const { isPlaing, lose, win, disabledBtn, comulativeMulti, totalBet } =
+    gameActions;
   const { btnColor, btnText } = styleActions;
   const { setInputBet, inputBet, balance, numberOfMines, setNumberOfMines } =
     useContext(GameContext);
@@ -12,7 +13,7 @@ export function Menu({ functions, gameActions, styleActions }) {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24,
   ];
-  
+
   const handleBetInmput = (e) => {
     setInputBet(e.target.value);
   };
@@ -40,6 +41,7 @@ export function Menu({ functions, gameActions, styleActions }) {
         <p>Amount</p>
         <div className="input-container">
           <input
+            disabled={isPlaing || win || lose}
             type="number"
             className="bet-input"
             value={inputBet}
@@ -47,13 +49,25 @@ export function Menu({ functions, gameActions, styleActions }) {
           />
 
           <div className="action-buttons">
-            <button className="half-btn" onClick={handleDiv}>
+            <button
+              disabled={isPlaing || win || lose}
+              className="half-btn"
+              onClick={handleDiv}
+            >
               ½
             </button>
-            <button className="double-btn" onClick={handleMulti}>
+            <button
+              disabled={isPlaing || win || lose}
+              className="double-btn"
+              onClick={handleMulti}
+            >
               2x
             </button>
-            <button className="max-btn" onClick={handleMax}>
+            <button
+              disabled={isPlaing || win || lose}
+              className="max-btn"
+              onClick={handleMax}
+            >
               Max
             </button>
           </div>
@@ -82,11 +96,30 @@ export function Menu({ functions, gameActions, styleActions }) {
           </form>
         </div>
       </section>
+      {isPlaing && (
+        <section className="info-rewards">
+          <div className="info-rewards-text">
+            <p>Total multi ({comulativeMulti.toFixed(2)}x)</p>
+            <p>{totalBet - inputBet} BTC</p>
+          </div>
+          <div className="info-rewards-totalBet">
+            <p>{(totalBet - inputBet).toFixed(2)}</p>
+            <img
+              src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
+              alt="Bitcoin"
+              width={24}
+              height={24}
+            />
+          </div>
+        </section>
+      )}
+
       <button
         className="start-btn"
+        disabled={(!isPlaing && inputBet > balance) || disabledBtn}
         onClick={() => {
           if (win) {
-            handleCashout();
+            handleRestart();
           } else if (lose) {
             handleRestart();
           } else if (isPlaing) {

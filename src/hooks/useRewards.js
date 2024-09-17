@@ -2,40 +2,40 @@ import { useContext } from "react";
 import { GameContext } from "../context/GameContext";
 
 export function useRewards() {
-  const { numberOfMines } = useContext(GameContext);
+  const { numberOfMines, inputBet } = useContext(GameContext);
   const minesCount = Number(numberOfMines);
 
   let multi = 0;
   switch (minesCount) {
     case 1:
-      multi = 0.05;
+      multi = 0.01;
       break;
     case 2:
-      multi = 0.1;
+      multi = 0.05;
       break;
     case 3:
-      multi = 0.15;
+      multi = 0.1;
       break;
     case 4:
-      multi = 0.2;
+      multi = 0.15;
       break;
     case 5:
-      multi = 0.25;
+      multi = 0.18;
       break;
     case 6:
-      multi = 0.3;
+      multi = 0.22;
       break;
     case 7:
-      multi = 0.4;
+      multi = 0.3;
       break;
     case 8:
-      multi = 0.5;
+      multi = 0.33;
       break;
     case 9:
-      multi = 0.60;
+      multi = 0.39;
       break;
     case 10:
-      multi = 0.75;
+      multi = 0.45;
       break;
     case 11:
       multi = 0.95;
@@ -50,7 +50,7 @@ export function useRewards() {
       multi = 1.25;
       break;
     case 15:
-      multi = 1.50;
+      multi = 1.5;
       break;
     case 16:
       multi = 1.75;
@@ -62,7 +62,7 @@ export function useRewards() {
       multi = 2.25;
       break;
     case 19:
-      multi = 2.50;
+      multi = 2.5;
       break;
     case 20:
       multi = 2.75;
@@ -74,7 +74,7 @@ export function useRewards() {
       multi = 3.25;
       break;
     case 23:
-      multi = 3.50;
+      multi = 3.5;
       break;
     case 24:
       multi = 3.75;
@@ -83,9 +83,12 @@ export function useRewards() {
       multi = 4;
       break;
     default:
+      multi = 0;
       break;
   }
 
-
+  const betMulti = 1 + inputBet / 1000
+  multi = multi * betMulti
+  
   return multi;
 }

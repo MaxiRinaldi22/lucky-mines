@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { GameContext } from "../context/GameContext";
 import { Bomb, BombLose, StarLose, StarWin } from "./Icons";
 import diamondSound from "../assets/sound/diamond.wav";
 import bomb from "../assets/sound/bomb.wav";
 
 export function Board({ gameState, gameActions, styleActions, card }) {
-  const { isPlaing, lose, setLose, win, setWin, winArray, setWinArray } =
-    gameActions;
-  const { clickedCards, setClickedCards, setBtnText, setBorder, border } =
-    styleActions;
-  const { cardIcons, setCardIcons } = card;
+  const { isPlaing, comulativeMulti, totalBet } = gameActions;
+  const { lose, setLose, win, setWin, winArray, setWinArray } = gameActions;
+  const { clickedCards, setClickedCards, setBtnText, setBorder, border } = styleActions;
+  const { cardIcons, setCardIcons, setClickedCardsReward } = card;
+  const { balance, setBalance } = useContext(GameContext);
   const [localClicked, setLocalClicked] = useState(null);
 
   const handleClick = (index) => {
@@ -24,6 +25,10 @@ export function Board({ gameState, gameActions, styleActions, card }) {
     } else {
       // If is a diamond
       setClickedCards((prevClick) =>
+        prevClick.map((clicked, i) => (i === index ? true : clicked))
+      );
+
+      setClickedCardsReward((prevClick) =>
         prevClick.map((clicked, i) => (i === index ? true : clicked))
       );
 
@@ -70,25 +75,20 @@ export function Board({ gameState, gameActions, styleActions, card }) {
     setBorder("none");
   };
 
+  const newBalance = balance + totalBet;
   useEffect(() => {
     if (winArray.every((item) => item)) {
       setWin(true);
+      setBalance(Number(newBalance.toFixed(2)));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [winArray]);
 
   useEffect(() => {
-    if (win) {
-      showResult();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (win) showResult();
   }, [win]);
 
   useEffect(() => {
-    if (lose) {
-      showResult();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (lose) showResult();
   }, [lose]);
 
   return (
@@ -96,12 +96,18 @@ export function Board({ gameState, gameActions, styleActions, card }) {
       <div className="win">
         {win && (
           <div className="container-win">
-            <h2>You Win</h2>
-          </div>
-        )}
-        {lose && (
-          <div className="container-win">
-            <h2>You Lose</h2>
+            <h2 className="win-multi">
+              {comulativeMulti.toFixed(2)}
+              <span>x</span>
+            </h2>
+            <hr />
+            <div className="container-win-amount">
+              <h2 className="win-amount">${totalBet.toFixed(2)}</h2>
+              <img
+                src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png"
+                alt="Bitcon"
+              />
+            </div>
           </div>
         )}
       </div>

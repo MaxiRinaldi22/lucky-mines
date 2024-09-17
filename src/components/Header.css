@@ -1,5 +1,4 @@
 header {
-  width: 100%;
   min-height: 5rem;
   box-shadow: 0 6px 15px -2px rgba(0, 0, 0, 0.356);
 
@@ -40,6 +39,7 @@ header {
   font-weight: 600;
   font-size: 0.9rem;
   color: white;
+  margin: 0;
 }
 
 .wallet img {
